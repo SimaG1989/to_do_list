@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Task List</title>
+</head>
+<body>
+
+<h1>Task List</h1>
+
+<form method="get" action="{% url 'task_list' %}">
+  <label for="status">Filter by status:</label>
+  <select name="status" id="status">
+    <option value="" {% if not selected_status %}selected{% endif %}>All</option>
+    <option value="New" {% if selected_status == 'New' %}selected{% endif %}>New</option>
+    <option value="In Progress" {% if selected_status == 'In Progress' %}selected{% endif %}>In Progress</option>
+    <option value="Completed" {% if selected_status == 'Completed' %}selected{% endif %}>Completed</option>
+  </select>
+  <button type="submit">Filter</button>
+</form>
+
+<ul>
+  {% for task in page_obj %}
+  <li>
+    <form method="post" action="{% url 'toggle_task' task.id %}">
+      {% csrf_token %}
+      <input type="checkbox" name="completed_checkbox" onchange="this.form.submit()" {% if task.status == 'Completed' %}checked{% endif %}>
+      {{ task.title }} — {{ task.status }}
+    </form>
+
+    <a href="{% url 'task_update' task.id %}">Edit</a>
+
+    <form method="post" action="{% url 'delete_task_view' task.id %}" style="display:inline;">
+      {% csrf_token %}
+      <button type="submit" onclick="return confirm('Delete?')">Delete</button>
+    </form>
+    <form method="get" action="{% url 'task-detail' task.id %}" style="display:inline;">
+    <button type="submit">Details</button>
+    </form>
+  </li>
+  {% empty %}
+  <li>No tasks</li>
+  {% endfor %}
+</ul>
+
+<div class="pagination">
+  {% if page_obj.has_previous %}
+    <a href="?page={{ page_obj.previous_page_number }}{% if selected_status %}&status={{ selected_status }}{% endif %}">⬅ Prev</a>
+  {% endif %}
+  <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+  {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}{% if selected_status %}&status={{ selected_status }}{% endif %}">Next ➡</a>
+  {% endif %}
+</div>
+
+<h2>Add New Task</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Add Task</button>
+  <button type="reset">Reset</button>
+</form>
+
+</body>
+</html>

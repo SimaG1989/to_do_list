@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Details</title>
+</head>
+<body>
+    <h1>{{ task.title }}</h1>
+    <p><strong>Status:</strong> {{ task.status }}</p>
+    <p><strong>Description:</strong> {{ task.description }}</p>
+
+    <a href="{% url 'task_list' %}">Back to list</a>
+</body>
+</html>
