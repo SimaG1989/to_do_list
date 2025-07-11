@@ -30,13 +30,13 @@ to_do_list/
 
 ## How to Start:
 
-**Clone the repository:**
+** Clone the repository: **
 ```
 git clone <https://github.com/SimaG1989/to_do_list.git>
 cd <to_do_list>
 ```
 
-**Activate Environment:**
+** Activate Environment: **
 ```
 python -m venv to_do_list
 to_do_list\Scripts\activate.bat
