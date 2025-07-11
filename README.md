@@ -4,10 +4,10 @@
 
 ## Features
 
--User registration and login
--Create, update, delete, and filter tasks
--Pagination for task lists
--REST API with JWT authentication
+- User registration and login
+- Create, update, delete, and filter tasks
+- Pagination for task lists
+- REST API with JWT authentication
 
 ## Project Structure:
 
@@ -21,12 +21,12 @@ to_do_list/
 └── to_do_list/
 
 ## Technologies:
-Python 3.11
-Django
-Django REST Framework
-PostgreSQL
-Docker & Docker Compose
-Simple JWT
+- Python 3.11
+- Django
+- Django REST Framework
+- PostgreSQL
+- Docker & Docker Compose
+- Simple JWT
 
 ## How to Start:
 
